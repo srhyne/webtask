@@ -6,7 +6,7 @@ module.exports = function(ctx, cb) {
   
   console.log(ctx)
   
-  console.log(q);
+  
  
   if( !q.host || !q.ip || !q.ns ){
     return ctx.storage.get(function(error, data){
