@@ -4,7 +4,7 @@
 module.exports = function(ctx, cb) {
   var q = ctx.query || {};
   
-  console.log(ctx)
+  console.log(q)
   
   
  
