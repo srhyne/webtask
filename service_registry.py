@@ -13,9 +13,7 @@ def report():
   url += "?ns=%s&host=%s&ip=%s" % (ns, host, ip)
 
   print(url);
-  print("\n");
-
-  os.system("curl %s" % (url) )
+  os.system("curl '%s'" % (url) )
   print("\n")
 
   return

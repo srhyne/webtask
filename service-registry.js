@@ -4,14 +4,14 @@
 module.exports = function(ctx, cb) {
   var q = ctx.query || {};
   
-  console.log(q);
- 
+  console.log(q)
+  
   if( !q.host || !q.ip || !q.ns ){
     return ctx.storage.get(function(error, data){
-     data = data || {};
+     data = data || { hosts : {} };
      return cb(null, {
        status : 'ok',
-       data : data
+       data : data.hosts
      });
      
    });
@@ -20,16 +20,17 @@ module.exports = function(ctx, cb) {
   var name = q.host;
   var ip = q.ip;
   var ns = q.ns;
-  var ts = (new Date().getTime()) / 10000;
+  var ts = ((new Date().getTime()) / 1000);
   
+
   var key = [q.host, q.ns].join('.');
   
   
    ctx.storage.get(function (error, data) {
       if (error) return cb(error);
-      data = data || {};
+      data = data || { hosts : {} };
       
-      data[key] = { name, ip, ns, ts };
+      data.hosts[key] = { name, ip, ns, ts };
       
       var attempts = 3;
       ctx.storage.set(data, function set_cb(error) {
